@@ -1,4 +1,4 @@
-package ru.nvgsoft.weatherapp.ui.theme
+package ru.nvgsoft.weatherapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
