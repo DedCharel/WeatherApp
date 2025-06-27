@@ -12,7 +12,7 @@ import ru.nvgsoft.weatherapp.data.local.model.CityDbModel
 interface FavouriteCitiesDao {
 
     @Query("SELECT * FROM favourite_cities")
-    fun getFavouriteCities(): Flow<CityDbModel>
+    fun getFavouriteCities(): Flow<List<CityDbModel>>
 
     @Query("SELECT EXISTS (SELECT * FROM favourite_cities WHERE id=:cityId LIMIT 1)")
     fun observeIsFavourite(cityId: Int): Flow<Boolean>
@@ -21,7 +21,7 @@ interface FavouriteCitiesDao {
     suspend fun addFavourite(cityDbModel: CityDbModel)
 
     @Query("DELETE FROM favourite_cities WHERE id=:cityId")
-    suspend fun deleteFavourite(cityId: Int)
+    suspend fun removeFavourite(cityId: Int)
 
 
 }
