@@ -5,11 +5,16 @@ import dagger.BindsInstance
 import dagger.Component
 
 @ApplicationScope
-@Component(modules = [DataModule::class])
+@Component(
+    modules = [
+        DataModule::class,
+        PresentationModule::class
+    ]
+)
 interface ApplicationComponent {
 
     @Component.Factory
-    interface Factory{
+    interface Factory {
 
         fun create(
             @BindsInstance context: Context
