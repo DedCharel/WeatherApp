@@ -12,6 +12,7 @@ import ru.nvgsoft.weatherapp.domain.usecase.GetFavouriteCitiesUseCase
 import ru.nvgsoft.weatherapp.presentation.favourite.FavouriteStore.Intent
 import ru.nvgsoft.weatherapp.presentation.favourite.FavouriteStore.Label
 import ru.nvgsoft.weatherapp.presentation.favourite.FavouriteStore.State
+import javax.inject.Inject
 
 interface FavouriteStore : Store<Intent, State, Label> {
 
@@ -58,7 +59,7 @@ interface FavouriteStore : Store<Intent, State, Label> {
     }
 }
 
-class FavouriteStoreFactory(
+class FavouriteStoreFactory @Inject constructor(
     private val storeFactory: StoreFactory,
     private val getFavouriteCitiesUseCase: GetFavouriteCitiesUseCase,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase
