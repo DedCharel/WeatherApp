@@ -1,33 +1,27 @@
 package ru.nvgsoft.weatherapp.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import ru.nvgsoft.weatherapp.data.network.api.ApiFactory
-import ru.nvgsoft.weatherapp.presentation.ui.theme.WeatherAppTheme
+import com.arkivanov.decompose.defaultComponentContext
+import ru.nvgsoft.weatherapp.WeatherApp
+import ru.nvgsoft.weatherapp.presentation.root.DefaultRootComponent
+import ru.nvgsoft.weatherapp.presentation.root.RootContent
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val apiService = ApiFactory.apiService
 
-        CoroutineScope(Dispatchers.Main).launch {
-            val currentWeather = apiService.loadCurrentWeather("London")
-            val forecast = apiService.loadForecast("London")
-            val cities = apiService.searchCity("London")
-            Log.d(
-                "MainActivity",
-                "Current Weather: $currentWeather\nForecase Weather: $forecast\nCities:$cities"
-            )
-        }
+    @Inject
+    lateinit var rootComponentFactory: DefaultRootComponent.Factory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as WeatherApp).applicationComponent.inject(this)
+
+        super.onCreate(savedInstanceState)
+
+        val root = rootComponentFactory.create(defaultComponentContext())
         setContent {
-            WeatherAppTheme {
-            }
+            RootContent(component = root)
         }
     }
 }
