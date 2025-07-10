@@ -1,17 +1,26 @@
 package ru.nvgsoft.weatherapp.presentation.favourite
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,9 +32,12 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.nvgsoft.weatherapp.R
 import ru.nvgsoft.weatherapp.presentation.ui.theme.CardGradients
 import ru.nvgsoft.weatherapp.presentation.ui.theme.Gradient
+import ru.nvgsoft.weatherapp.presentation.ui.theme.Orange
 
 @Composable
 fun FavouriteContent(component: FavouriteComponent) {
@@ -90,6 +102,41 @@ private fun CityCard(
                 text = cityItem.city.name,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.background
+            )
+        }
+    }
+}
+
+@Composable
+private fun AddFavouriteCityCard(
+    onClick: () -> Unit
+) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+        shape = MaterialTheme.shapes.extraLarge,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground)
+    ) {
+        Column(
+            modifier = Modifier
+                .sizeIn(minHeight = 196.dp)
+                .fillMaxWidth()
+                .clickable { onClick() }
+                .padding(24.dp)
+        ) {
+            Icon(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp)
+                    .size(48.dp),
+                imageVector = Icons.Default.Edit,
+                tint = Orange,
+                contentDescription = null
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = stringResource(R.string.button_add_favourite),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
     }
