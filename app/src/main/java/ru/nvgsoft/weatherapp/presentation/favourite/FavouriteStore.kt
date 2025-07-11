@@ -44,7 +44,7 @@ interface FavouriteStore : Store<Intent, State, Label> {
 
             data class Loaded(
                 val tempC: Float,
-                val iconURL: String
+                val iconUrl: String
             ) : WeatherState
         }
     }
@@ -192,7 +192,7 @@ class FavouriteStoreFactory @Inject constructor(
                             it.copy(
                                 weatherState = State.WeatherState.Loaded(
                                     tempC = msg.tempC,
-                                    iconURL = msg.conditionIconURL
+                                    iconUrl = msg.conditionIconURL
                                 )
                             )
                         } else {
