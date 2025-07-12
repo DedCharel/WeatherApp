@@ -1,11 +1,12 @@
 package ru.nvgsoft.weatherapp.data.mapper
 
-import android.icu.util.Calendar
+
 import ru.nvgsoft.weatherapp.data.network.dto.WeatherCurrentDto
 import ru.nvgsoft.weatherapp.data.network.dto.WeatherDto
 import ru.nvgsoft.weatherapp.data.network.dto.WeatherForecastDto
 import ru.nvgsoft.weatherapp.domain.entity.Forecast
 import ru.nvgsoft.weatherapp.domain.entity.Weather
+import java.util.Calendar
 import java.util.Date
 
 fun WeatherCurrentDto.toEntity() :  Weather = current.toEntity()

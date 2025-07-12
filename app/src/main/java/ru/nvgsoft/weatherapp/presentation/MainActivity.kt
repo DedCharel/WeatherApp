@@ -14,12 +14,16 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var rootComponentFactory: DefaultRootComponent.Factory
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (applicationContext as WeatherApp).applicationComponent.inject(this)
 
         super.onCreate(savedInstanceState)
 
+
         val root = rootComponentFactory.create(defaultComponentContext())
+
+
         setContent {
             RootContent(component = root)
         }

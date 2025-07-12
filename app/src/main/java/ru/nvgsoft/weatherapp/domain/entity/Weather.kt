@@ -1,6 +1,6 @@
 package ru.nvgsoft.weatherapp.domain.entity
 
-import android.icu.util.Calendar
+import java.util.Calendar
 
 
 data class Weather(
