@@ -24,10 +24,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+fiximport androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.nvgsoft.weatherapp.R
@@ -39,8 +43,17 @@ fun SearchContent(component: SearchComponent) {
 
     val state by component.model.collectAsState()
 
-    SearchBar(
+    val focusRequester = remember {
+        FocusRequester()
+    }
 
+    LaunchedEffect(key1 = Unit) {
+        focusRequester.requestFocus()
+    }
+
+    SearchBar(
+        modifier = Modifier.focusRequester(focusRequester),
+        placeholder = { Text(text = stringResource(R.string.search))},
         query = state.searchQuery,
         onQueryChange = { component.changeSearchQuery(it) },
         onSearch = { component.onClickSearch() },
